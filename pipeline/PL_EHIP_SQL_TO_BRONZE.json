@@ -570,7 +570,11 @@
 				},
 				"userProperties": [],
 				"typeProperties": {
-					"notebookPath": "/Users/shivam.singh22@spit.ac.in/NB_EHIP_Medallion_Pipeline"
+					"notebookPath": "/Users/shivam.singh22@spit.ac.in/NB_EHIP_Medallion_Pipeline",
+					"baseParameters": {
+						"pipeline_run_id": "@pipeline().RunId",
+						"load_date": "@formatDateTime(utcnow(),'yyyy-MM-dd')"
+					}
 				},
 				"linkedServiceName": {
 					"referenceName": "LS_EHIP_Databricks",
