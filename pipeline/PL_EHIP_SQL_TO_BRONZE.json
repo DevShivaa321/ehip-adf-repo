@@ -549,6 +549,33 @@
 						"type": "DatasetReference"
 					}
 				]
+			},
+			{
+				"name": "RUN_EHIP_MEDALLION_NOTEBOOK",
+				"type": "DatabricksNotebook",
+				"dependsOn": [
+					{
+						"activity": "COPY_MedicalHistory_SQL_TO_BRONZE",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"notebookPath": "/Users/shivam.singh22@spit.ac.in/NB_EHIP_Medallion_Pipeline"
+				},
+				"linkedServiceName": {
+					"referenceName": "LS_EHIP_Databricks",
+					"type": "LinkedServiceReference"
+				}
 			}
 		],
 		"annotations": []
