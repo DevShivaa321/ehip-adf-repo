@@ -1,0 +1,15 @@
+{
+	"name": "shivam-Project-EHIP",
+	"properties": {
+		"trustModeClaimForMi": {
+			"value": "Disabled",
+			"editable": true
+		}
+	},
+	"location": "eastasia",
+	"identity": {
+		"type": "SystemAssigned",
+		"principalId": "01c5ee8d-1505-4520-8f0d-a3e8b380d4b6",
+		"tenantId": "a0ace882-59fc-4482-a66f-dabc4cf09c40"
+	}
+}
