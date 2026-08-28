@@ -1,0 +1,57 @@
+{
+	"name": "DS_EHIP_Patient_SQL",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "LS_EHIP_AzureSQL",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": [
+			{
+				"name": "PatientId",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "FirstName",
+				"type": "varchar"
+			},
+			{
+				"name": "LastName",
+				"type": "varchar"
+			},
+			{
+				"name": "DateOfBirth",
+				"type": "date"
+			},
+			{
+				"name": "Gender",
+				"type": "varchar"
+			},
+			{
+				"name": "DoctorId",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "CreatedAt",
+				"type": "datetime2",
+				"scale": 7
+			},
+			{
+				"name": "UpdatedAt",
+				"type": "datetime2",
+				"scale": 7
+			},
+			{
+				"name": "IsDeleted",
+				"type": "bit"
+			}
+		],
+		"typeProperties": {
+			"schema": "dbo",
+			"table": "Patient"
+		}
+	}
+}

@@ -1,0 +1,23 @@
+{
+	"name": "DS_EHIP_MedicalHistory_Bronze",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "LS_EHIP_ADLS",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "DelimitedText",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobFSLocation",
+				"folderPath": "MedicalHistory",
+				"fileSystem": "bronze"
+			},
+			"columnDelimiter": ",",
+			"escapeChar": "\\",
+			"firstRowAsHeader": true,
+			"quoteChar": "\""
+		},
+		"schema": []
+	}
+}

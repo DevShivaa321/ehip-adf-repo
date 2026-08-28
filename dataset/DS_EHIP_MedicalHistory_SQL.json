@@ -1,0 +1,79 @@
+{
+	"name": "DS_EHIP_MedicalHistory_SQL",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "LS_EHIP_AzureSQL",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": [
+			{
+				"name": "HistoryId",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "PatientId",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "SugarLevel",
+				"type": "float",
+				"precision": 15
+			},
+			{
+				"name": "HasDiabetes",
+				"type": "bit"
+			},
+			{
+				"name": "RecordedAt",
+				"type": "datetime2",
+				"scale": 7
+			},
+			{
+				"name": "UpdatedAt",
+				"type": "datetime2",
+				"scale": 7
+			},
+			{
+				"name": "BloodPressureSys",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "BloodPressureDia",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "HeartRate",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "Cholesterol",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "BMI",
+				"type": "float",
+				"precision": 15
+			},
+			{
+				"name": "Smoking",
+				"type": "bit"
+			},
+			{
+				"name": "AlcoholConsumption",
+				"type": "bit"
+			}
+		],
+		"typeProperties": {
+			"schema": "dbo",
+			"table": "MedicalHistory"
+		}
+	}
+}
