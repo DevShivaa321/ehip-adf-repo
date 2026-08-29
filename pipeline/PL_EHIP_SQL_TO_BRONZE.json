@@ -5,6 +5,8 @@
 			{
 				"name": "COPY_Doctor_SQL_TO_BRONZE",
 				"type": "Copy",
+				"state": "Inactive",
+				"onInactiveMarkAs": "Succeeded",
 				"dependsOn": [],
 				"policy": {
 					"timeout": "0.12:00:00",
@@ -167,6 +169,8 @@
 			{
 				"name": "COPY_Patient_SQL_TO_BRONZE",
 				"type": "Copy",
+				"state": "Inactive",
+				"onInactiveMarkAs": "Succeeded",
 				"dependsOn": [
 					{
 						"activity": "COPY_Doctor_SQL_TO_BRONZE",
@@ -336,6 +340,8 @@
 			{
 				"name": "COPY_MedicalHistory_SQL_TO_BRONZE",
 				"type": "Copy",
+				"state": "Inactive",
+				"onInactiveMarkAs": "Succeeded",
 				"dependsOn": [
 					{
 						"activity": "COPY_Patient_SQL_TO_BRONZE",
@@ -572,8 +578,14 @@
 				"typeProperties": {
 					"notebookPath": "/Users/shivam.singh22@spit.ac.in/NB_EHIP_Medallion_Pipeline",
 					"baseParameters": {
-						"pipeline_run_id": "@pipeline().RunId",
-						"load_date": "@formatDateTime(utcnow(),'yyyy-MM-dd')"
+						"pipeline_run_id": {
+							"value": "@pipeline().RunId",
+							"type": "Expression"
+						},
+						"load_date": {
+							"value": "@formatDateTime(utcnow(),'yyyy-MM-dd')",
+							"type": "Expression"
+						}
 					}
 				},
 				"linkedServiceName": {
