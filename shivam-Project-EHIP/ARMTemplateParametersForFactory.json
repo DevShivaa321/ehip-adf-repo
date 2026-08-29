@@ -11,6 +11,9 @@
 		"LS_EHIP_AzureSQL_password": {
 			"value": ""
 		},
+		"LS_EHIP_Databricks_accessToken": {
+			"value": ""
+		},
 		"LS_EHIP_ADLS_properties_typeProperties_url": {
 			"value": "https://ehipdatalake.dfs.core.windows.net/"
 		},
@@ -22,6 +25,9 @@
 		},
 		"LS_EHIP_AzureSQL_properties_typeProperties_userName": {
 			"value": "projectehip"
+		},
+		"LS_EHIP_Databricks_properties_typeProperties_existingClusterId": {
+			"value": "0829-173139-sqmraarl"
 		}
 	}
 }

@@ -15,6 +15,10 @@
 			"type": "secureString",
 			"metadata": "Secure string for 'password' of 'LS_EHIP_AzureSQL'"
 		},
+		"LS_EHIP_Databricks_accessToken": {
+			"type": "secureString",
+			"metadata": "Secure string for 'accessToken' of 'LS_EHIP_Databricks'"
+		},
 		"LS_EHIP_ADLS_properties_typeProperties_url": {
 			"type": "string",
 			"defaultValue": "https://ehipdatalake.dfs.core.windows.net/"
@@ -30,6 +34,10 @@
 		"LS_EHIP_AzureSQL_properties_typeProperties_userName": {
 			"type": "string",
 			"defaultValue": "projectehip"
+		},
+		"LS_EHIP_Databricks_properties_typeProperties_existingClusterId": {
+			"type": "string",
+			"defaultValue": "0829-173139-sqmraarl"
 		},
 		"containerUri": {
 			"type": "string",
@@ -64,6 +72,9 @@
 					"LS_EHIP_AzureSQL_password": {
 						"value": "[parameters('LS_EHIP_AzureSQL_password')]"
 					},
+					"LS_EHIP_Databricks_accessToken": {
+						"value": "[parameters('LS_EHIP_Databricks_accessToken')]"
+					},
 					"LS_EHIP_ADLS_properties_typeProperties_url": {
 						"value": "[parameters('LS_EHIP_ADLS_properties_typeProperties_url')]"
 					},
@@ -75,6 +86,9 @@
 					},
 					"LS_EHIP_AzureSQL_properties_typeProperties_userName": {
 						"value": "[parameters('LS_EHIP_AzureSQL_properties_typeProperties_userName')]"
+					},
+					"LS_EHIP_Databricks_properties_typeProperties_existingClusterId": {
+						"value": "[parameters('LS_EHIP_Databricks_properties_typeProperties_existingClusterId')]"
 					}
 				}
 			},

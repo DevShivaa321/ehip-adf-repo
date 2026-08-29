@@ -15,6 +15,10 @@
 			"type": "secureString",
 			"metadata": "Secure string for 'password' of 'LS_EHIP_AzureSQL'"
 		},
+		"LS_EHIP_Databricks_accessToken": {
+			"type": "secureString",
+			"metadata": "Secure string for 'accessToken' of 'LS_EHIP_Databricks'"
+		},
 		"LS_EHIP_ADLS_properties_typeProperties_url": {
 			"type": "string",
 			"defaultValue": "https://ehipdatalake.dfs.core.windows.net/"
@@ -30,6 +34,10 @@
 		"LS_EHIP_AzureSQL_properties_typeProperties_userName": {
 			"type": "string",
 			"defaultValue": "projectehip"
+		},
+		"LS_EHIP_Databricks_properties_typeProperties_existingClusterId": {
+			"type": "string",
+			"defaultValue": "0829-173139-sqmraarl"
 		}
 	},
 	"variables": {
@@ -45,6 +53,8 @@
 					{
 						"name": "COPY_Doctor_SQL_TO_BRONZE",
 						"type": "Copy",
+						"state": "Inactive",
+						"onInactiveMarkAs": "Succeeded",
 						"dependsOn": [],
 						"policy": {
 							"timeout": "0.12:00:00",
@@ -209,6 +219,8 @@
 					{
 						"name": "COPY_Patient_SQL_TO_BRONZE",
 						"type": "Copy",
+						"state": "Inactive",
+						"onInactiveMarkAs": "Succeeded",
 						"dependsOn": [
 							{
 								"activity": "COPY_Doctor_SQL_TO_BRONZE",
@@ -380,6 +392,8 @@
 					{
 						"name": "COPY_MedicalHistory_SQL_TO_BRONZE",
 						"type": "Copy",
+						"state": "Inactive",
+						"onInactiveMarkAs": "Succeeded",
 						"dependsOn": [
 							{
 								"activity": "COPY_Patient_SQL_TO_BRONZE",
@@ -595,6 +609,43 @@
 								"parameters": {}
 							}
 						]
+					},
+					{
+						"name": "RUN_EHIP_MEDALLION_NOTEBOOK",
+						"type": "DatabricksNotebook",
+						"dependsOn": [
+							{
+								"activity": "COPY_MedicalHistory_SQL_TO_BRONZE",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"policy": {
+							"timeout": "0.12:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"notebookPath": "/Users/shivam.singh22@spit.ac.in/NB_EHIP_Medallion_Pipeline",
+							"baseParameters": {
+								"pipeline_run_id": {
+									"value": "@pipeline().RunId",
+									"type": "Expression"
+								},
+								"load_date": {
+									"value": "@formatDateTime(utcnow(),'yyyy-MM-dd')",
+									"type": "Expression"
+								}
+							}
+						},
+						"linkedServiceName": {
+							"referenceName": "LS_EHIP_Databricks",
+							"type": "LinkedServiceReference"
+						}
 					}
 				],
 				"policy": {
@@ -608,7 +659,8 @@
 				"[concat(variables('factoryId'), '/datasets/DS_EHIP_Patient_SQL')]",
 				"[concat(variables('factoryId'), '/datasets/DS_EHIP_Patient_Bronze')]",
 				"[concat(variables('factoryId'), '/datasets/DS_EHIP_MedicalHistory_SQL')]",
-				"[concat(variables('factoryId'), '/datasets/DS_EHIP_MedicalHistory_Bronze')]"
+				"[concat(variables('factoryId'), '/datasets/DS_EHIP_MedicalHistory_Bronze')]",
+				"[concat(variables('factoryId'), '/linkedServices/LS_EHIP_Databricks')]"
 			]
 		},
 		{
@@ -937,6 +989,24 @@
 						"type": "SecureString",
 						"value": "[parameters('LS_EHIP_AzureSQL_password')]"
 					}
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/LS_EHIP_Databricks')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "AzureDatabricks",
+				"typeProperties": {
+					"domain": "https://adb-7405604695863570.10.azuredatabricks.net",
+					"accessToken": {
+						"type": "SecureString",
+						"value": "[parameters('LS_EHIP_Databricks_accessToken')]"
+					},
+					"existingClusterId": "[parameters('LS_EHIP_Databricks_properties_typeProperties_existingClusterId')]"
 				}
 			},
 			"dependsOn": []
