@@ -1,12 +1,10 @@
 {
-	"name": "PL_EHIP_SQL_TO_BRONZE",
+	"name": "PL_EHIP_END_TO_END_PIPELINE",
 	"properties": {
 		"activities": [
 			{
 				"name": "COPY_Doctor_SQL_TO_BRONZE",
 				"type": "Copy",
-				"state": "Inactive",
-				"onInactiveMarkAs": "Succeeded",
 				"dependsOn": [],
 				"policy": {
 					"timeout": "0.12:00:00",
@@ -169,8 +167,6 @@
 			{
 				"name": "COPY_Patient_SQL_TO_BRONZE",
 				"type": "Copy",
-				"state": "Inactive",
-				"onInactiveMarkAs": "Succeeded",
 				"dependsOn": [
 					{
 						"activity": "COPY_Doctor_SQL_TO_BRONZE",
@@ -340,8 +336,6 @@
 			{
 				"name": "COPY_MedicalHistory_SQL_TO_BRONZE",
 				"type": "Copy",
-				"state": "Inactive",
-				"onInactiveMarkAs": "Succeeded",
 				"dependsOn": [
 					{
 						"activity": "COPY_Patient_SQL_TO_BRONZE",
